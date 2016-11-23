@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#444343"
+
+    >
+    <ImageView
+        android:id="@+id/ctImg"
+        android:layout_width="120dp"
+        android:layout_height="90dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:text="Thoi su"
+            android:textSize="14dp"
+            android:textColor="#cecaca"
+            android:id="@+id/ctLoai" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="Tieu de"
+            android:textColor="#FFF"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:id="@+id/ctTieude" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#b7b5b5"
+                android:textSize="10dp"
+                android:text="Ngay"
+                android:id="@+id/ctNgay" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#b7b5b5"
+                android:textSize="10dp"
+                android:text=" | "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#b7b5b5"
+                android:textSize="10dp"
+                android:text="Gio"
+                android:id="@+id/ctGio" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
