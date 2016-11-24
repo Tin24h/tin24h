@@ -64,7 +64,6 @@ public class ThoiSu extends Fragment{
         protected void onPostExecute(String s) {
             try {
                 JSONArray jsonArray = new JSONArray(s);
-//                Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
                 int totallength = jsonArray.length();
                 int loaded = 0;
                 int progress;
@@ -87,16 +86,6 @@ public class ThoiSu extends Fragment{
                 }
                 Custom_tonghop listAdapter = new Custom_tonghop(getActivity(), R.layout.custom_lisview, arrTT);
                 listView.setAdapter(listAdapter);
-//                Toast.makeText(getActivity(), "" + arrTT.size(), Toast.LENGTH_LONG).show();
-//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(TongHop.this, ChiTiet.class);
-//                        intent.putExtra("name", String.valueOf(arrTT.get(position).getIdtt()));
-//                        startActivity(intent);
-//                    }
-//                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
