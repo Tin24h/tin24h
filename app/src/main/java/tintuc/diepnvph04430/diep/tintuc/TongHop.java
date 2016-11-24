@@ -59,7 +59,7 @@ public class TongHop extends Fragment{
     }
 
 
-    class doGetTT extends AsyncTask<String, Integer, String> {
+    private  class doGetTT extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {

@@ -1,9 +1,7 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +39,7 @@ public class MainActivity extends AppCompatActivity
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,11 +62,11 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new TongHop(), "Tong Hop");
-        adapter.addFrag(new ThoiSu(),"Thoi Su");
-        adapter.addFrag(new TheThao(),"The Thao");
-        adapter.addFrag(new GiaiTri(),"Giai Tri");
-        adapter.addFrag(new KinhTe(),"Kinh Te");
+        adapter.addFrag(new TongHop(), "Tổng hợp");
+        adapter.addFrag(new ThoiSu(),"Thời sự");
+        adapter.addFrag(new TheThao(),"Thể thao");
+        adapter.addFrag(new GiaiTri(),"Giải trí");
+        adapter.addFrag(new KinhTe(),"Kinh tế");
         viewPager.setAdapter(adapter);
     }
 

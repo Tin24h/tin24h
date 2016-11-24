@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#444343"
+    android:background="#ffffff"
 
     >
     <ImageView
@@ -22,13 +22,13 @@
             android:layout_height="wrap_content"
             android:text="Thoi su"
             android:textSize="14dp"
-            android:textColor="#cecaca"
+            android:textColor="#646161"
             android:id="@+id/ctLoai" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:text="Tieu de"
-            android:textColor="#FFF"
+            android:textColor="#000000"
             android:textSize="16dp"
             android:textStyle="bold"
             android:id="@+id/ctTieude" />
@@ -41,21 +41,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#b7b5b5"
+                android:textColor="#646161"
                 android:textSize="10dp"
+                android:textStyle="italic"
                 android:text="Ngay"
                 android:id="@+id/ctNgay" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#b7b5b5"
+                android:textStyle="italic"
+                android:textColor="#646161"
                 android:textSize="10dp"
                 android:text=" | "/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#b7b5b5"
+                android:textStyle="italic"
+                android:textColor="#646161"
                 android:textSize="10dp"
                 android:text="Gio"
                 android:id="@+id/ctGio" />

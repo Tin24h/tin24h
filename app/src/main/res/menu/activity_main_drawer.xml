@@ -5,11 +5,11 @@
         <item
             android:id="@+id/nav_trangchu"
             android:icon="@drawable/ic_menu_camera"
-            android:title="trang chu" />
+            android:title="Trang chủ" />
         <item
             android:id="@+id/nav_tinhot"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Bai doc dau tien" />
+            android:title="Tin mới nhất" />
         <item
             android:id="@+id/nav_tienich"
             android:icon="@drawable/ic_menu_slideshow"
@@ -17,11 +17,11 @@
         <item
             android:id="@+id/nav_trangbaoquantam"
             android:icon="@drawable/ic_menu_manage"
-            android:title="trang bao quan tam" />
+            android:title="Bài đã lưu" />
         <item
             android:id="@+id/nav_caidat"
             android:icon="@drawable/ic_menu_manage"
-            android:title="tien ich" />
+            android:title="Tiện ích" />
     </group>
 
     <item android:title="Communicate">
