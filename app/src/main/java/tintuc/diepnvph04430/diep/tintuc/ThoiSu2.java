@@ -1,8 +1,8 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
+import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +20,17 @@ import java.util.ArrayList;
 
 import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
 
+/**
+ * Created by Joker on 11/24/2016.
+ */
 
-public class ThoiSu extends Fragment{
+public class ThoiSu2 extends Fragment{
     View thoisu;
     final String API = "http://webtintuccc.esy.es/Thoisu.php";
     ListView listView;
     ArrayList<TinTuc> arrTT;
 
-    public ThoiSu() {
+    public ThoiSu2() {
         // Required empty public constructor
     }
 
@@ -47,7 +50,7 @@ public class ThoiSu extends Fragment{
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new ThoiSu.doGetTT().execute(API);
+                new ThoiSu2.doGetTT().execute(API);
             }
         });
         return thoisu;
