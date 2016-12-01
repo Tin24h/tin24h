@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:overScrollMode="always"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/ccttieude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tieu de"
+            android:textColor="#000"
+            android:textSize="80px"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cttloaitin"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:background="#942a48"
+                android:gravity="center"
+                android:text="Thoi su"
+                android:textColor="#fafafa" />
+
+            <TextView
+                android:id="@+id/cttngay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Thoi su"
+                android:textColor="#8b8787"
+                android:textSize="50px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+
+                android:layout_marginTop="8dp"
+                android:text="|"
+                android:textSize="50px" />
+
+            <TextView
+                android:id="@+id/cttgio"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Thoi su"
+                android:textColor="#8b8787"
+                android:textSize="50px" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cttimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <ScrollView
+        android:id="@+id/coun"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:paddingBottom="16dp"
+        >
+        <TextView
+            android:id="@+id/cttnoidung"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="20dp"
+            android:layout_height="wrap_content"
+            android:text="In this tutorial, you will learn how to extract elements from a HTML table using JSOUP Library. JSOUP provides a very convenient API for extracting and manipulating data, using DOM, CSS, and jquery-like methods. JSOUP allows you to scrape and parse HTML from a URL, file, or string and many more. We will create a ListView on the main view and populate it with extracted HTML elements from a HTML table provided. So lets begin…
+
+
+Before you proceed with this tutorial, download the latest JSOUP library from here.
+
+Paste your downloaded Jsoup file into your project libs folder as shown on the image below." />
+
+    </ScrollView>
+    <ImageView
+        android:layout_gravity="right"
+        android:layout_marginBottom="0dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_share"/>
+
+
+
+
+</LinearLayout>

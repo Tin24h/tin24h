@@ -1,6 +1,5 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
  * Created by Joker on 11/24/2016.
  */
 
-public class ThoiSu2 extends Fragment{
+public class ThoiSu2 extends android.support.v4.app.Fragment{
     View thoisu;
     final String API = "http://webtintuccc.esy.es/Thoisu.php";
     ListView listView;
