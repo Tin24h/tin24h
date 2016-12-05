@@ -9,71 +9,70 @@
     android:orientation="vertical">
 
 
+    <TextView
+        android:id="@+id/ccttieude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tieu de"
+        android:textColor="#000"
+        android:textSize="35px"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/ccttieude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tieu de"
-            android:textColor="#000"
-            android:textSize="80px"
-            android:textStyle="bold" />
+            android:id="@+id/cttloaitin"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:background="#942a48"
+            android:gravity="center"
+            android:text="Thoi su"
+            android:textColor="#fafafa" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/cttloaitin"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="8dp"
-                android:background="#942a48"
-                android:gravity="center"
-                android:text="Thoi su"
-                android:textColor="#fafafa" />
-
-            <TextView
-                android:id="@+id/cttngay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="8dp"
-                android:text="Thoi su"
-                android:textColor="#8b8787"
-                android:textSize="50px" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-
-                android:layout_marginTop="8dp"
-                android:text="|"
-                android:textSize="50px" />
-
-            <TextView
-                android:id="@+id/cttgio"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Thoi su"
-                android:textColor="#8b8787"
-                android:textSize="50px" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/cttimg"
+        <TextView
+            android:id="@+id/cttngay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Thoi su"
+            android:textColor="#8b8787"
+            android:textSize="20px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+
+            android:layout_marginTop="8dp"
+            android:text="|"
+            android:textSize="20px" />
+
+        <TextView
+            android:id="@+id/cttgio"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Thoi su"
+            android:textColor="#8b8787"
+            android:textSize="20px" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/cttimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ScrollView
         android:id="@+id/coun"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="410dp"
         android:paddingBottom="16dp"
         >
         <TextView
