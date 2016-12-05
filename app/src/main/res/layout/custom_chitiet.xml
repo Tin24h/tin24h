@@ -91,6 +91,7 @@ Paste your downloaded Jsoup file into your project libs folder as shown on the i
 
     </ScrollView>
     <ImageView
+        android:id="@+id/share"
         android:layout_gravity="right"
         android:layout_marginBottom="0dp"
         android:layout_width="100dp"

@@ -1,11 +1,13 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -21,11 +23,12 @@ import java.util.ArrayList;
 import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
 
 
-public class GiaiTri extends Fragment{
+public class GiaiTri extends Fragment {
     View giaitri;
     final String API = "http://webtintuccc.esy.es/Giaitri.php";
     ListView listView;
     ArrayList<TinTuc> arrTT;
+
     public GiaiTri() {
         // Required empty public constructor
     }
@@ -49,9 +52,10 @@ public class GiaiTri extends Fragment{
                 new GiaiTri.doGetTT().execute(API);
             }
         });
-        return  giaitri;
+        return giaitri;
     }
-    private  class doGetTT extends AsyncTask<String, Integer, String> {
+
+    private class doGetTT extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -63,22 +67,16 @@ public class GiaiTri extends Fragment{
         protected void onPostExecute(String s) {
             try {
                 JSONArray jsonArray = new JSONArray(s);
-//                Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
-                int totallength = jsonArray.length();
-                int loaded = 0;
-                int progress;
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject objecttt = jsonArray.getJSONObject(i);
-//                    loaded++;
-//                    progress =loaded*100/totallength;
-//                    publishProgress(progress);
 
                     arrTT.add(new TinTuc(
                             objecttt.getInt("id"),
                             objecttt.getString("loaitin"),
                             objecttt.getString("tieude"),
                             objecttt.getString("anh"),
-                            null,
+                            objecttt.getString("noidung"),
                             objecttt.getString("ngay"),
                             objecttt.getString("gio")
 
@@ -86,16 +84,21 @@ public class GiaiTri extends Fragment{
                 }
                 Custom_tonghop listAdapter = new Custom_tonghop(getActivity(), R.layout.custom_lisview, arrTT);
                 listView.setAdapter(listAdapter);
-//                Toast.makeText(getActivity(), "" + arrTT.size(), Toast.LENGTH_LONG).show();
-//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(TongHop.this, ChiTiet.class);
-//                        intent.putExtra("name", String.valueOf(arrTT.get(position).getIdtt()));
-//                        startActivity(intent);
-//                    }
-//                });
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getContext(), ChiTiet.class);
+                        intent.putExtra("loaitin", arrTT.get(position).getLoaitt());
+                        intent.putExtra("tieude", arrTT.get(position).getTieudett());
+                        intent.putExtra("anh", arrTT.get(position).getAnhtt());
+                        intent.putExtra("noidung", arrTT.get(position).getNoidungtt());
+                        intent.putExtra("ngay", arrTT.get(position).getNgaytt());
+                        intent.putExtra("gio", arrTT.get(position).getGiott());
+                        startActivity(intent);
+                    }
+                });
+//
             } catch (JSONException e) {
                 e.printStackTrace();
             }

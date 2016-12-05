@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
 
 
-public class TongHop extends Fragment{
+public class TongHop extends Fragment {
 
     View tonghop;
     final String API = "http://webtintuccc.esy.es/";
@@ -61,7 +61,7 @@ public class TongHop extends Fragment{
     }
 
 
-    private  class doGetTT extends AsyncTask<String, Integer, String> {
+    private class doGetTT extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -73,15 +73,8 @@ public class TongHop extends Fragment{
         protected void onPostExecute(String s) {
             try {
                 JSONArray jsonArray = new JSONArray(s);
-//                Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
-                int totallength = jsonArray.length();
-                int loaded = 0;
-                int progress;
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject objecttt = jsonArray.getJSONObject(i);
-//                    loaded++;
-//                    progress =loaded*100/totallength;
-//                    publishProgress(progress);
 
                     arrTT.add(new TinTuc(
                             objecttt.getInt("id"),
@@ -100,9 +93,9 @@ public class TongHop extends Fragment{
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getContext(),ChiTiet.class);
+                            Intent intent = new Intent(getContext(), ChiTiet.class);
                             intent.putExtra("loaitin", arrTT.get(position).getLoaitt());
-                            intent.putExtra("tieude",arrTT.get(position).getTieudett());
+                            intent.putExtra("tieude", arrTT.get(position).getTieudett());
                             intent.putExtra("anh", arrTT.get(position).getAnhtt());
                             intent.putExtra("noidung", arrTT.get(position).getNoidungtt());
                             intent.putExtra("ngay", arrTT.get(position).getNgaytt());

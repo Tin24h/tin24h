@@ -1,10 +1,12 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -54,7 +56,7 @@ public class ThoiSu2 extends android.support.v4.app.Fragment{
         });
         return thoisu;
     }
-    private  class doGetTT extends AsyncTask<String, Integer, String> {
+    private class doGetTT extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -66,34 +68,46 @@ public class ThoiSu2 extends android.support.v4.app.Fragment{
         protected void onPostExecute(String s) {
             try {
                 JSONArray jsonArray = new JSONArray(s);
-                int totallength = jsonArray.length();
-                int loaded = 0;
-                int progress;
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject objecttt = jsonArray.getJSONObject(i);
-//                    loaded++;
-//                    progress =loaded*100/totallength;
-//                    publishProgress(progress);
 
                     arrTT.add(new TinTuc(
                             objecttt.getInt("id"),
                             objecttt.getString("loaitin"),
                             objecttt.getString("tieude"),
                             objecttt.getString("anh"),
-                            null,
+                            objecttt.getString("noidung"),
                             objecttt.getString("ngay"),
                             objecttt.getString("gio")
 
                     ));
+                    Custom_tonghop listAdapter = new Custom_tonghop(getActivity(), R.layout.custom_lisview, arrTT);
+                    listView.setAdapter(listAdapter);
+//                    Toast.makeText(getActivity(), "" + arrTT.size(), Toast.LENGTH_LONG).show();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getContext(), ChiTiet.class);
+                            intent.putExtra("loaitin", arrTT.get(position).getLoaitt());
+                            intent.putExtra("tieude", arrTT.get(position).getTieudett());
+                            intent.putExtra("anh", arrTT.get(position).getAnhtt());
+                            intent.putExtra("noidung", arrTT.get(position).getNoidungtt());
+                            intent.putExtra("ngay", arrTT.get(position).getNgaytt());
+                            intent.putExtra("gio", arrTT.get(position).getGiott());
+                            startActivity(intent);
+                        }
+                    });
+
                 }
-                Custom_tonghop listAdapter = new Custom_tonghop(getActivity(), R.layout.custom_lisview, arrTT);
-                listView.setAdapter(listAdapter);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
-    //dsdsdsojj
+
+
     private static String docNoiDung_Tu_URL(String theUrl) {
         StringBuilder content = new StringBuilder();
 
