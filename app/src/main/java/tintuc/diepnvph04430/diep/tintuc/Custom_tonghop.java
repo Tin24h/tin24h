@@ -19,7 +19,9 @@ import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
  */
 
 public class Custom_tonghop extends BaseAdapter {
+
     Context mycontext;
+
     int myLayout;
     List<TinTuc> ArrTintuc;
 

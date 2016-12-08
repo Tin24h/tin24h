@@ -27,7 +27,10 @@
         <activity android:name=".KinhTe" />
         <activity android:name=".Trangchu" />
         <activity android:name=".Tinmoinhat" />
-        <activity android:name=".ChiTiet"></activity>
+        <activity android:name=".ChiTiet"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
