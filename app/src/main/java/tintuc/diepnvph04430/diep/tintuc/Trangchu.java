@@ -14,8 +14,9 @@ public class Trangchu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        lichsuview = inflater.inflate(R.layout.activity_trangchu, container,false);
+        lichsuview = inflater.inflate(R.layout.activity_one_fragment, container,false);
         return lichsuview;
+
     }
 
 }

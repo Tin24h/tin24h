@@ -7,7 +7,7 @@
     tools:context="tintuc.diepnvph04430.diep.tintuc.TheThao">
 
     <ListView
-        android:id="@+id/listViewThethao"
+        android:id="@+id/lvtintuc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="55dp"></ListView>

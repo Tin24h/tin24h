@@ -7,7 +7,7 @@
     tools:context="tintuc.diepnvph04430.diep.tintuc.KinhTe">
 
     <ListView
-        android:id="@+id/listViewKinhte"
+        android:id="@+id/lvtintuc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="55dp"

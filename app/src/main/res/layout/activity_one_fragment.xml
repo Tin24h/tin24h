@@ -5,7 +5,7 @@
     tools:context="tintuc.diepnvph04430.diep.tintuc.TongHop">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lvtintuc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="55dp"

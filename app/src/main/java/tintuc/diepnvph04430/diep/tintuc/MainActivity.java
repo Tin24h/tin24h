@@ -1,5 +1,8 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -7,10 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,26 +25,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
-
+        implements NavigationView.OnNavigationItemSelectedListener,SearchView.OnQueryTextListener{
+    private SearchView searchView;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    final Context context = this;
+    ArrayList<TinTuc> listfilm = new ArrayList<TinTuc>();
+    tintuc_adapter customList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ////////////////Check mang////////////////////////////
+
+        ///////////////////////////////////////////////
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -49,6 +55,39 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (new CheckNet(MainActivity.this).isNetworkAvailable()) {
+                    //todo có mạng
+                    viewPager = (ViewPager) findViewById(R.id.viewpager);
+                    setupViewPager(viewPager);
+
+                    tabLayout = (TabLayout) findViewById(R.id.tabs);
+                    tabLayout.setupWithViewPager(viewPager);
+
+                }else {
+                    //todo ko có mạng
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    // Set the Alert Dialog Message
+                    builder.setMessage("Bạn chưa có kết nối mạng !!!")
+                            .setCancelable(false)
+                            .setPositiveButton("Thử Lại",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                            int id) {
+                                            // Restart the Activity
+                                            Intent intent = getIntent();
+                                            finish();
+                                            startActivity(intent);
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+        });
     }
     @Override
     public void onBackPressed() {
@@ -62,7 +101,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new TongHop(), "Tổng hợp");
+        adapter.addFrag(new TongHop(), "Tin Mới");
         adapter.addFrag(new ThoiSu2(),"Thời sự");
         adapter.addFrag(new TheThao(),"Thể thao");
         adapter.addFrag(new GiaiTri(),"Giải trí");
@@ -70,6 +109,26 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        newText = newText.toLowerCase();
+        ArrayList<TinTuc> newlist = new ArrayList<>();
+        for (TinTuc a : listfilm) {
+            String name = a.getTitle().toLowerCase();
+            if (name.contains(newText)) {
+                newlist.add(a);
+            }
+            customList.setFilter(newlist);
+        }
+
+        return true;
+    }
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -103,8 +162,11 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem itemSearch = menu.findItem(R.id.menu_seach);
+        searchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
+
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -116,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_seach) {
             return true;
         }
 
@@ -134,17 +196,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_trangchu) {
             // Handle the camera action
             fragmentManager.beginTransaction().replace(R.id.frame_content, new Trangchu()).commit();
+
         } else if (id == R.id.nav_tinhot) {
 
         } else if (id == R.id.nav_tienich) {
 
-        } else if (id == R.id.nav_trangbaoquantam) {
-
-        } else if (id == R.id.nav_caidat) {
+        }  else if (id == R.id.nav_caidat) {
 
         } else if (id == R.id.nav_share) {
+            startActivity(new Intent(MainActivity.this,AboutUs.class));
 
-        } else if (id == R.id.nav_send) {
+
+        } else if (id == R.id.nav_exit) {
+            finish();
 
         }
 

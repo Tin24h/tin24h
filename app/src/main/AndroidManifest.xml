@@ -3,10 +3,11 @@
     package="tintuc.diepnvph04430.diep.tintuc">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iconn"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,16 +22,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".TongHop" />
-        <activity android:name=".ThoiSu" />
+        <activity android:name=".ThoiSu2" />
         <activity android:name=".TheThao" />
         <activity android:name=".GiaiTri" />
         <activity android:name=".KinhTe" />
         <activity android:name=".Trangchu" />
         <activity android:name=".Tinmoinhat" />
-        <activity android:name=".ChiTiet"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".AboutUs"
+            />
+        <activity
+            android:name=".ChiTiet"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Tintucchinh" />
 
-        </activity>
     </application>
 
 </manifest>

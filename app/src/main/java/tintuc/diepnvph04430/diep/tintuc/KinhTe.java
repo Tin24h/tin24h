@@ -1,33 +1,41 @@
 package tintuc.diepnvph04430.diep.tintuc;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import tintuc.diepnvph04430.diep.tintuc.model.TinTuc;
 
-
-public class KinhTe extends Fragment {
+public class KinhTe extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener {
     View kinhte;
-    final String API = "http://webtintuccc.esy.es/Kinhte.php";
-    ListView listView;
+    ListView lv;
+    boolean abc= false;
+    tintuc_adapter tintuc_adapter;
+    ArrayList<TinTuc> mangdocbao;
     ArrayList<TinTuc> arrTT;
+
     public KinhTe() {
         // Required empty public constructor
     }
@@ -42,93 +50,161 @@ public class KinhTe extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         kinhte = inflater.inflate(R.layout.activity_kinh_te, container, false);
-        listView = (ListView) kinhte.findViewById(R.id.listViewKinhte);
-        arrTT = new ArrayList<TinTuc>();
-
+        mangdocbao=new  ArrayList<TinTuc>();
+        lv=(ListView)kinhte.findViewById(R.id.lvtintuc);
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new KinhTe.doGetTT().execute(API);
+                new KinhTe.Readdata().execute("http://vnexpress.net/rss/kinh-doanh.rss");
+                abc = true;
+                new KinhTe.Readdata().execute("http://tuoitre.vn/rss/tt-kinh-te.rss");
             }
         });
+        setHasOptionsMenu(true);
         return kinhte;
     }
-    private class doGetTT extends AsyncTask<String, Integer, String> {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.findItem(R.id.menu_seach);
+        SearchView sv = new SearchView(((MainActivity) getActivity()).getSupportActionBar().getThemedContext());
+        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setActionView(item, sv);
+        sv.setOnQueryTextListener(this);
+        sv.setIconifiedByDefault(false);
+
+
+
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+
+        newText = newText.toLowerCase();
+        ArrayList<TinTuc> newlist = new ArrayList<>();
+        for (TinTuc a : mangdocbao) {
+            String name = a.getTitle().toLowerCase();
+            if (name.contains(newText)) {
+                newlist.add(a);
+
+
+            }
+            tintuc_adapter.setFilter(newlist);
+
+
+        }
+
+        return true;
+    }
+
+    class Readdata extends AsyncTask<String ,Integer , String> {
+
+        ProgressDialog pbloading;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pbloading = new ProgressDialog(getContext());
+            pbloading.setMessage("Đang tải  chờ xíu nhé..");
+            pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pbloading.setCancelable(true);
+            pbloading.setCanceledOnTouchOutside(false);
+            pbloading.show();
+        }
+
 
         @Override
         protected String doInBackground(String... params) {
-
             return docNoiDung_Tu_URL(params[0]);
         }
 
         @Override
         protected void onPostExecute(String s) {
-            try {
-                JSONArray jsonArray = new JSONArray(s);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject objecttt = jsonArray.getJSONObject(i);
+            pbloading.dismiss();
+            XMLDOMParser parser = new XMLDOMParser();
+            Document document = parser.getDocument(s);
+            NodeList nodeList = document.getElementsByTagName("item");
+            NodeList nodeListdescription= document.getElementsByTagName("description");
+            String title = "";
+            String hinhanh= "";
+            String link ="";
 
-                    arrTT.add(new TinTuc(
-                            objecttt.getInt("id"),
-                            objecttt.getString("loaitin"),
-                            objecttt.getString("tieude"),
-                            objecttt.getString("anh"),
-                            objecttt.getString("noidung"),
-                            objecttt.getString("ngay"),
-                            objecttt.getString("gio")
+            for(int i = 0 ; i<nodeList.getLength(); i++){
+                String cdata=nodeListdescription.item(i+1).getTextContent();
+                Pattern p = Pattern.compile("<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>");
+                Matcher matcher = p.matcher(cdata);
 
-                    ));
-                    Custom_tonghop listAdapter = new Custom_tonghop(getActivity(), R.layout.custom_lisview, arrTT);
-                    listView.setAdapter(listAdapter);
-//                    Toast.makeText(getActivity(), "" + arrTT.size(), Toast.LENGTH_LONG).show();
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //Toast.makeText(getApplicationContext(),""+arrTT.get(position).getIdtt(),Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getContext(), ChiTiet.class);
-                            intent.putExtra("loaitin", arrTT.get(position).getLoaitt());
-                            intent.putExtra("tieude", arrTT.get(position).getTieudett());
-                            intent.putExtra("anh", arrTT.get(position).getAnhtt());
-                            intent.putExtra("noidung", arrTT.get(position).getNoidungtt());
-                            intent.putExtra("ngay", arrTT.get(position).getNgaytt());
-                            intent.putExtra("gio", arrTT.get(position).getGiott());
-                            startActivity(intent);
-                        }
-                    });
+                if(matcher.find()){
+                    hinhanh=matcher.group(1);
 
                 }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                Element element =(Element)nodeList.item(i);
+                title = parser.getValue(element,"title");
+                link= parser.getValue(element,"link");
+
+                mangdocbao.add(new TinTuc(title,link,hinhanh));
+
+
             }
+            if(abc) {
+                tintuc_adapter = new tintuc_adapter(getContext(), R.layout.dong_layoutlistview, mangdocbao);
+                lv.setAdapter(tintuc_adapter);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Intent intent = new Intent(getContext(), Tintucchinh.class);
+                        intent.putExtra("link", mangdocbao.get(position).getLink());
+
+                        startActivity(intent);
+
+                    }
+                });
+            }
+
+
+            super.onPostExecute(s);
+
         }
     }
-
-
-    private static String docNoiDung_Tu_URL(String theUrl) {
+    private static String docNoiDung_Tu_URL(String theUrl)
+    {
         StringBuilder content = new StringBuilder();
 
-        try {
+        try
+        {
             // create a url object
             URL url = new URL(theUrl);
 
-            // create a urlconnection object
+
             URLConnection urlConnection = url.openConnection();
 
-            // wrap the urlconnection in a bufferedreader
+
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             String line;
 
-            // read from the urlconnection via the bufferedreader
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null)
+            {
                 content.append(line + "\n");
             }
             bufferedReader.close();
-        } catch (Exception e) {
+        }
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
         return content.toString();
     }
+
 
 }

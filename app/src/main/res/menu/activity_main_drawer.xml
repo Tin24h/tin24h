@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_trangchu"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/home"
             android:title="Trang chủ" />
         <item
             android:id="@+id/nav_tinhot"
@@ -14,10 +14,7 @@
             android:id="@+id/nav_tienich"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Tin hot" />
-        <item
-            android:id="@+id/nav_trangbaoquantam"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Bài đã lưu" />
+
         <item
             android:id="@+id/nav_caidat"
             android:icon="@drawable/ic_menu_manage"
@@ -29,11 +26,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="About us" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_exit"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Thoát" />
         </menu>
     </item>
 
